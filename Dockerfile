@@ -1,14 +1,16 @@
 # Use an official Node.js runtime as the base image
 FROM node:20-alpine
 
+RUN npm i -g pnpm@latest
+
 # Set the working directory inside the container
-WORKDIR /usr/src/app
+WORKDIR /app
 
 # Copy package.json and package-lock.json to the working directory
-COPY package*.json ./
+COPY package*.json pnpm-lock.yaml ./
 
 # Install application dependencies
-RUN npm install
+RUN pnpm install
 
 # Copy the rest of the application source code
 COPY . ./
@@ -17,4 +19,4 @@ COPY . ./
 EXPOSE 5333
 
 # The default command to run when the container starts
-CMD [ "npm", "start" ]
+CMD [ "pnpm", "start" ]
