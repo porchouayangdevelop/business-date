@@ -1,0 +1,10 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    ports:
+      - "5333:5333"
+    volumes:
+      - ./src:/usr/src/app
+      - /usr/src/app/node_modules # Anonymous volume to prevent host node_modules from overwriting container's
